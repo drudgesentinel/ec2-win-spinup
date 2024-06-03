@@ -23,5 +23,5 @@ output "caller_user" {
 
 output "rdp_password" {
   value = rsadecrypt("${var.os == "windows_2019" ? aws_instance.windows_2019_instance[0].password_data : aws_instance.windows_2016_instance[0].password_data
-}", file("~/creds/${var.keypair_name}") )
+}", file("~/creds/${var.keypair_name}.pem") )
 }
