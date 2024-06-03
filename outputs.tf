@@ -21,6 +21,7 @@ output "caller_user" {
   value = data.aws_caller_identity.current.user_id
 }
 
-output "login_string" {
-  value = "ssh -i ${var.keypair_name}.pem ec2-user@${var.os == "rhel" ? aws_instance.rhel_instance[0].public_ip : aws_instance.suse_instance[0].public_ip}"
+output "rdp_password" {
+  value = rsadecrypt(${var.os == "windows_2019" ? aws_instance.windows_2019_instance[0].password_data : aws_instance.windows_2016_instance[0].password_data
+}, file("~/creds/${var.keypair_name}") )
 }
