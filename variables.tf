@@ -11,18 +11,8 @@ variable "aws_region" {
 
 variable "os" {
   type        = string
-  default     = "rhel"
+  default     = "windows_2019"
   description = "The operating system for your instance. Should be either 'rhel' or 'suse'"
-}
-
-variable "rhel_version" {
-  type        = string
-  description = "The RHEL major version (7-9) to install."
-  default     = 9
-  validation {
-    condition     = var.rhel_version > 6 && var.rhel_version < 10
-    error_message = "The RHEL versions should be between 7 and 9"
-  }
 }
 
 variable "number_of_instances" {
@@ -33,17 +23,6 @@ variable "number_of_instances" {
     condition     = var.number_of_instances > 0
     error_message = "The number of instances needs to be greater than zero"
   }
-}
-
-variable "suse_version" {
-  type        = string
-  description = "The SUSE major version to install (12 or 15)."
-  default     = "15"
-  validation {
-    condition     = var.suse_version == "12" || var.suse_version == "15"
-    error_message = "The SUSE version should be either 12 or 15"
-  }
-
 }
 
 variable "instance_type" {
