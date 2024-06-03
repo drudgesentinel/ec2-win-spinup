@@ -20,6 +20,7 @@ resource "aws_instance" "windows_2019_instance" {
   ami           = data.aws_ami.windows-2019.id
   instance_type = var.instance_type
   key_name      = var.keypair_name
+  get_password_data = true
   tags = {
     created_by = data.aws_caller_identity.current.arn
     ticket_num = var.ticket_num
@@ -32,6 +33,7 @@ resource "aws_instance" "windows_2016_instance" {
   ami           = data.aws_ami.windows-2016.id
   instance_type = var.instance_type
   key_name      = var.keypair_name
+  get_password_data = true
   tags = {
     created_by = data.aws_caller_identity.current.arn
     ticket_num = var.ticket_num
