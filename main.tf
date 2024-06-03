@@ -23,7 +23,7 @@ resource "aws_instance" "windows_2019_instance" {
   tags = {
     created_by = data.aws_caller_identity.current.arn
     ticket_num = var.ticket_num
-    Name       = "rhel-repro-${count.index + 1}"
+    Name       = "windows2019-repro-${count.index + 1}"
   }
 }
 
@@ -35,6 +35,6 @@ resource "aws_instance" "windows_2016_instance" {
   tags = {
     created_by = data.aws_caller_identity.current.arn
     ticket_num = var.ticket_num
-    Name       = "suse-repro-${count.index + 1}"
+    Name       = "windows2016-repro-${count.index + 1}"
   }
 }
