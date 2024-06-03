@@ -44,12 +44,12 @@ resource "aws_security_group" "baremetal_gremlin" {
   }
 }
 
-resource "aws_vpc_security_group_ingress_rule" "ssh_inbound" {
+resource "aws_vpc_security_group_ingress_rule" "rdp_inbound" {
   security_group_id = aws_security_group.baremetal_gremlin.id
 
   cidr_ipv4   = "0.0.0.0/0"
-  from_port   = 22
-  to_port     = 22
+  from_port   = 3389  
+  to_port     = 3389
   ip_protocol = "tcp"
 }
 
