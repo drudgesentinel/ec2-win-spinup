@@ -35,7 +35,7 @@ resource "aws_ec2_managed_prefix_list" "gremlin_API_and_webhooks" {
 }
 
 resource "aws_security_group" "baremetal_gremlin_windows" {
-  name        = "Baremetal Gremlin"
+  name        = "Baremetal Gremlin for Windows"
   description = "Minimum required permissions per AWS VPC docs"
 
   tags = {
