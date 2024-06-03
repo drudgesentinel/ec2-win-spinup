@@ -1,27 +1,22 @@
-# tested ami owner in us-west-2 to verify correct ownership account
-# aws ec2 describe-images --image-ids ami-0f7197c592205b389 | rg -i owner
-#            "OwnerId": "309956199498",
-#            "ImageOwnerAlias": "amazon",
+#source: https://github.com/guillermo-musumeci/terraform-aws-latest-ami/blob/master/Get-Latest-Windows-AMI.tf
 
-data "aws_ami" "redhat-linux" {
+# Get latest Windows Server 2019 AMI
+data "aws_ami" "windows-2019" {
   most_recent = true
-  owners      = ["309956199498"]
+  owners      = ["amazon"]
   filter {
     name   = "name"
-    values = ["RHEL-${var.rhel_version}.*"]
+    values = ["Windows_Server-2019-English-Full-Base*"]
   }
 }
 
-data "aws_ami" "suse-linux" {
+# Get latest Windows Server 2016 AMI
+data "aws_ami" "windows-2016" {
   most_recent = true
-  owners      = ["013907871322"] # Amazon
+  owners      = ["amazon"]
   filter {
     name   = "name"
-    values = ["suse-sles-${var.suse_version}*-hvm-ssd-x86_64"]
-  }
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
+    values = ["Windows_Server-2016-English-Full-Base*"]
   }
 }
 
