@@ -7,6 +7,7 @@ https://www.gremlin.com/docs/getting-started-install-virtual-machine
 https://www.gremlin.com/docs/platform-integrations-webhooks
 
 This code will provide the RDP password in plaintext as an output. This is extremely not good for anything but testing environments; if you didn't already know that don't use this repo for creating resources. 
+In order to decrypt the password, you will need to provide a valid path to the keypair (keypair_name) which is currently hardcoded in the output 'rdp_password' in the 'file' function call. 
 
 Usable variables are:
 
