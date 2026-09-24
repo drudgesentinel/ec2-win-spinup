@@ -17,8 +17,8 @@ New-Item -ItemType Directory -Force -Path $configDir | Out-Null
 $config = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("${gremlin_config_b64}"))
 [System.IO.File]::WriteAllText("$configDir\config.yaml", $config)
 
-# Restart the agent service(s) so they pick up the new config
-Get-Service -Name "gremlin*" -ErrorAction SilentlyContinue | Restart-Service -Force
+# Restart the agent so it picks up the new config
+Restart-Service -Name gremlind
 
 Stop-Transcript
 </powershell>
