@@ -59,3 +59,14 @@ resource "aws_vpc_security_group_egress_rule" "gremlin_outbound" {
   ip_protocol       = -1
 }
 
+
+# needed to download the agent installer from windows.gremlin.com
+resource "aws_vpc_security_group_egress_rule" "https_outbound" {
+  security_group_id = aws_security_group.baremetal_gremlin_windows.id
+  description       = "HTTPS for Gremlin installer download"
+
+  cidr_ipv4   = "0.0.0.0/0"
+  from_port   = 443
+  to_port     = 443
+  ip_protocol = "tcp"
+}

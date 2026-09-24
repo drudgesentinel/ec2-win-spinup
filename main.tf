@@ -29,6 +29,7 @@ resource "aws_instance" "windows_2019_instance" {
   get_password_data           = true
   user_data                   = local.gremlin_user_data
   user_data_replace_on_change = true
+  vpc_security_group_ids      = [aws_security_group.baremetal_gremlin_windows.id]
   tags = {
     created_by = data.aws_caller_identity.current.arn
     ticket_num = var.ticket_num
@@ -44,6 +45,7 @@ resource "aws_instance" "windows_2016_instance" {
   get_password_data           = true
   user_data                   = local.gremlin_user_data
   user_data_replace_on_change = true
+  vpc_security_group_ids      = [aws_security_group.baremetal_gremlin_windows.id]
   tags = {
     created_by = data.aws_caller_identity.current.arn
     ticket_num = var.ticket_num
