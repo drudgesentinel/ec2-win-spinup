@@ -33,4 +33,11 @@ variable "instance_type" {
 variable "keypair_name" {
   type        = string
   description = "This is the name of the region-specific ec2 keypair for accessing your instance"
+  default     = "gremlin-support-keypair"
+}
+
+variable "gremlin_config_path" {
+  type        = string
+  description = "Local path to the Gremlin agent config.yaml, written to C:\\ProgramData\\Gremlin\\Agent\\config.yaml on the instance"
+  default     = "config.yaml"
 }

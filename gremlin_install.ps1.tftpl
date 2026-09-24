@@ -1,0 +1,24 @@
+<powershell>
+$ErrorActionPreference = "Stop"
+Start-Transcript -Path "C:\ProgramData\gremlin-userdata.log" -Append
+
+# Install the Gremlin agent; Start-Process -Wait blocks until msiexec finishes
+$msi = Start-Process -FilePath "msiexec.exe" -Wait -PassThru -ArgumentList @(
+  "/quiet",
+  "/package", "https://windows.gremlin.com/installer/latest/gremlin_installer.msi",
+  "/l*v", "C:\ProgramData\gremlin-install.log"
+)
+if ($msi.ExitCode -ne 0) { throw "Gremlin installer exited with code $($msi.ExitCode)" }
+
+# Config is passed in base64 so YAML content can't break PowerShell quoting.
+# WriteAllText writes UTF-8 without a BOM (Set-Content -Encoding UTF8 on PS 5.1 adds one).
+$configDir = "C:\ProgramData\Gremlin\Agent"
+New-Item -ItemType Directory -Force -Path $configDir | Out-Null
+$config = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("${gremlin_config_b64}"))
+[System.IO.File]::WriteAllText("$configDir\config.yaml", $config)
+
+# Restart the agent service(s) so they pick up the new config
+Get-Service -Name "gremlin*" -ErrorAction SilentlyContinue | Restart-Service -Force
+
+Stop-Transcript
+</powershell>

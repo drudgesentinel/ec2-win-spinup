@@ -38,3 +38,6 @@ terraform.rc
 
 # Ignore backend configuration file
 *.conf
+
+# Gremlin agent config (contains team ID / secret)
+config.yaml
